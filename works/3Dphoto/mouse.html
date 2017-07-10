@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				border:0;
+				padding:0;
+				margin:0;
+			}
+			body{
+				background:black;
+			}
+			#box{
+				position:absolute;
+				left:0;
+				right:0;
+				margin:100px auto;
+				width:400px;
+				display: table;
+				height:448px;
+			transform-style: preserve-3d;
+			transform:perspective(6000px) rotateX(0deg) rotateY(180deg);
+			}
+			@keyframes mover{
+		 	from{
+			transform:rotateZ(0deg) rotateX(0deg) rotateY(0deg);
+		 	}
+		 	to{
+			transform:rotateZ(360deg) rotateX(360deg) rotateY(0deg);
+		 	}
+		 }
+			li{
+				list-style:none;
+				position:absolute;
+				width:100%;
+			}
+			img{
+				width:100%;
+				display: block;
+			}
+			div{
+				width:1080px;
+				height:600px;
+				border:1px solid red;
+				position:absolute;
+				left:0;
+				right:0;
+				margin:30px auto;
+				overflow:hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+		<ul id="box">
+			<li><img src="img/1.jpg" alt="" /></li>
+			<li><img src="img/2.jpg" alt="" /></li>
+			<li><img src="img/3.jpg" alt="" /></li>
+			<li><img src="img/4.jpg" alt="" /></li>
+			<li><img src="img/5.jpg" alt="" /></li>
+			<li><img src="img/6.jpg" alt="" /></li>
+			<li><img src="img/7.jpg" alt="" /></li>
+			<li><img src="img/8.jpg" alt="" /></li>
+		</ul>
+		</div>
+	</body>
+	<script>
+			var box=document.getElementById("box");//获取ul
+			var li=document.getElementsByTagName("li");//获取li
+			var du=360/li.length; ///360度除以li的个数，得出每张图片的角度
+			var a=0,b=0;
+			for(var i=0;i<li.length;i++){//遍历每个li转的角度
+			li[i].style.transform = "rotateY("+i*du+"deg) translateZ(500px)";
+			}
+		document.ondragstart=function(){//鼠标拖动时的事件
+			return false;//false不可选
+		}
+		
+		document.onmousedown=function(ev){//鼠标第一下点下去的事件
+			var ev=ev||window.event;//获取坐标
+			var x=ev.clientX;
+			var y=ev.clientY; 
+			document.onmousemove=function(ev){//鼠标移动的事件
+				var ev=ev||window.event;//获取移动时的坐标，计算ul转动的角度
+				var X=ev.clientX;
+				var Y=ev.clientY;
+				var le=X-x;
+				var tp=Y-y;
+				console.log(b)
+				b-=tp*0.1;
+				a+=le*0.1;
+				console.log(b)
+				box.style.transform="perspective(6000px) rotateX("+b+"deg) rotateY("+a+"deg)";
+				x=X;
+				y=Y;
+			}
+		    document.onmouseup=function(){//鼠标松开关闭鼠标移动事件
+		    	document.onmousemove=null;
+		    }
+	}
+	
+	</script>
+</html>

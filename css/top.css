@@ -1,0 +1,77 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+html,
+body {
+  height: 100%;
+  font-family: "微软雅黑";
+  font-size: 12px;
+}
+ol,
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.top {
+  height: 60px;
+  width: 100%;
+}
+.top > div {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  top: 0px;
+}
+.top > .nav > ul {
+  display: table;
+  margin: 0 auto;
+  position: relative;
+}
+.top > .nav > ul > li {
+  float: left;
+  height: 60px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  position: relative;
+}
+.top > .nav > ul > li p {
+  line-height: 60px;
+  width: 120px;
+  font-size: 16px;
+  font-weight: bolder;
+  text-shadow: 1px 1px 1px black;
+}
+.top > .nav > ul > li:nth-child(1):before,
+.top > .nav > ul > li:nth-child(2):before,
+.top > .nav > ul > li:nth-child(3):before,
+.top > .nav > ul > li:nth-child(4):before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  top: 20px;
+  width: 2px;
+  background: white;
+  right: -1px;
+}
+.top > .nav > ul > li:last-child {
+  position: absolute;
+  height: 5px;
+  width: 120px;
+  background: red;
+  bottom: 0;
+  left: 240px;
+  transition: all .3s;
+  display: none;
+}
+.top > .nav1 {
+  display: none;
+}
+@media screen and (max-width: 1230px) {
+}
+/*# sourceMappingURL=top.css.map */

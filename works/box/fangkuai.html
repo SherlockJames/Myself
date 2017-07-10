@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.p {
+				height: 80px;
+				font-size: 60px;
+				line-height: 80px;
+				text-align: center;
+				font-weight: bolder;
+			}
+			
+			.p>p {
+				display: inline-block;
+			}
+			
+			.kuang {
+				width: 1040px;
+				height: 800px;
+				border: 1px solid red;
+				margin: 0 auto;
+				position: relative;
+			}
+			
+			ul {
+				list-style: none;
+				position: relative;
+				width: 100%;
+				float: left;
+			}
+			
+			li {
+				height: 50px;
+				float: left;
+				width: 100px;
+				box-sizing: border-box;
+				border: 1px solid cyan;
+				background: red;
+				margin: 10px 15px 10px 15px;
+			}
+			
+			.zhuan {
+				position: absolute;
+				bottom: 0;
+				width: 180px;
+				height: 30px;
+				background: black;
+			}
+			
+			.qiu {
+				height: 50px;
+				width: 50px;
+				position: absolute;
+				z-index: 1000;
+				background: blue;
+				top: 300px;
+				display: none;
+			}
+			
+			.begin {
+				width: 200px;
+				height: 40px;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+			}
+		</style>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="p">
+			<p>打方块游戏</p>
+			<p>分数: <span class="fen"></span></p>
+		</div>
+		<div class="kuang">
+			<ul>
+				<li></li>
+			</ul>
+			<div class="qiu"></div>
+			<div class="zhuan"></div>
+		</div>
+		<button class="begin">开始</button>
+	</body>
+	<script type="text/javascript">
+	for(var k=0;k<31;k++){
+		$("li").eq(0).clone().appendTo($("ul"))
+	}
+		var le = $(".zhuan").offset().left;
+		var left = parseInt($(".qiu").css("left"));
+		var top1 = parseInt($(".qiu").css("top"));
+		var flag = false;
+		var flag1 = false;
+
+		var a = 0,
+			b = 0,
+			c = 0;
+		var fun = new Fun();
+		//		     	var qius=document.querySelectorAll("li");
+		//		     	var qiu=document.querySelector(".qiu");
+		//		     	console.log(qius[0].offsetLeft)
+		$(".kuang").mousemove(function(ev) {
+			var ev = ev || event;
+			var x = ev.clientX;
+			var X = x - le - $(".zhuan").width() / 2;
+			if (X < 0) {
+				X = 0;
+			}
+			if (X > $(".kuang").width() - $(".zhuan").width()) {
+				X = $(".kuang").width() - $(".zhuan").width()
+			}
+			$(".zhuan").css("left", X + "px")
+		})
+
+		var kaishi;
+		$(".begin").click(function() {
+			clearInterval(kaishi);
+			var suiji2 = parseInt(Math.random() * 2)
+			flag2 = false;
+			if(suiji2==1){
+			flag = false;
+			}else{
+			flag = true;
+			}
+			$(".fen").html(0);
+			$("li").css("opacity", "1")
+			var suiji = parseInt(Math.random() * 980)
+			a=0;
+			b=0;
+			$(".qiu").css("display", "inline-block").css("left", suiji + "px").css("top","300px")
+			left = suiji;
+			top1 = 300;
+								c=0;
+								$(".fen").html(0)
+			kaishi = setInterval(fun.fuzhi, 2)
+		})
+
+		function Fun() {
+			if (this instanceof Fun) {
+				function xmath() {
+					if (flag) {
+						a--;
+						if (a + left <= 0) {
+							flag = false;
+						}
+					} else {
+						a++;
+						if (a + left > $(".kuang").width() - $(".qiu").width()) {
+							flag = true;
+						}
+					}
+
+					return a;
+				}
+
+				function ymath() {
+					if (flag1) {
+						b--;
+						if (b + top1 <= 0) {
+							flag1 = false;
+						}
+					} else {
+						b++;
+					}
+
+					return b;
+				}
+                  
+                function win(){
+                	if($(".fen").html()==1600){
+                		alert("成功，获得最高分")
+							clearInterval(kaishi);
+                	}
+                }
+                 
+				this.fuzhi = function() {
+					$(".qiu").css("left", left + xmath() + "px").css("top", top1 + ymath() + "px")
+					var zhuanleft = parseInt($(".zhuan").css("left"));
+					var qiuleft = parseInt($(".qiu").css("left"));
+					if (b + top1 > $(".kuang").height() - $(".qiu").height() - $(".zhuan").height()) {
+
+						if (qiuleft > zhuanleft - 49 && qiuleft < zhuanleft + 199) {
+							flag1 = true;
+						} else {
+							alert("失败")
+							clearInterval(kaishi);
+						}
+					}
+					var qius = document.querySelectorAll("li");
+					var qiu = document.querySelector(".qiu");
+					for (var i = 0; i < qius.length; i++) {
+
+						if ($("li").eq(i).css("opacity") != 0) {
+
+							var li_t = parseInt(qius[i].offsetTop);
+							var li_l = parseInt(qius[i].offsetLeft);
+							var li_h = parseInt(qius[i].offsetHeight);
+							var li_w = parseInt(qius[i].offsetWidth);
+
+							var qiu_t = parseInt(qiu.offsetTop);
+							var qiu_l = parseInt(qiu.offsetLeft);
+							var qiu_h = parseInt(qiu.offsetHeight);
+							var qiu_w = parseInt(qiu.offsetWidth);
+
+							if (qiu_t == li_t + li_h && (li_l - 49 < qiu_l && li_l + li_w > qiu_l)) {//下边距判断
+								qius[i].style.opacity = 0;
+								c+=50;
+								$(".fen").html(c)
+								win();
+								flag1 = false;
+								
+							}
+							if (qiu_l == li_l + li_w && (li_t + li_h > qiu_t && li_t - 49 < qiu_t)) {//右边距判断
+								qius[i].style.opacity = 0
+								c+=50;
+								$(".fen").html(c)
+								win();
+								flag = false;
+							}
+
+							if (qiu_t + qiu_h == li_t && (li_l - 49 < qiu_l && li_l + li_w > qiu_l)) {//上边距判断
+								qius[i].style.opacity = 0
+								c+=50;
+								$(".fen").html(c)
+								win();
+								flag1 = true;
+							}
+							if (qiu_l + qiu_w == li_l && (li_t + li_h > qiu_t && li_t - 49 < qiu_t)) {//左边距判断
+								qius[i].style.opacity = 0
+								c+=50;
+								$(".fen").html(c)
+								win();
+								flag = true;
+							}
+
+						}
+					}
+
+				}
+
+			} else {
+				return new Fun();
+			}
+
+		}
+	</script>
+
+</html>
