@@ -79,7 +79,7 @@ a {
   position: relative;
   overflow: hidden;
   height: 600px;
-  background-size: 100% auto;
+  background-size: auto 200%;
 }
 .center > div:not(:last-child) > img {
   width: 100%;
@@ -89,7 +89,7 @@ a {
   background-attachment: fixed;
 }
 .center > .bunner1 {
-  background: url(../img/bunner.png);
+  background: url(../img/bunner.png) no-repeat 50% 50%;
 }
 .center > .bunner1 > div {
   height: 80%;
@@ -135,7 +135,7 @@ a {
 .center > div.bunner2 > div > div > p,
 .center > div.bunner2 > div > div > ul {
   float: left;
-  width: 51%;
+  width: 57%;
 }
 .center > div.bunner2 > div > div > p:nth-child(1) span {
   display: block;
@@ -167,7 +167,7 @@ a {
   line-height: 50px;
 }
 .center > div.bunner2 > div > div > ul > li > p {
-  width: 35%;
+  width: 30%;
   display: inline-block;
   font-weight: bolder;
 }
@@ -179,7 +179,16 @@ a {
   background-size: 100% auto;
 }
 .center > .bunner3 {
-  background: url(../img/bunner3.png);
+  background: url(../img/bunner3.png) no-repeat 50% 50%;
+}
+.center > .bunner3 > p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50px;
+  font-size: 36px;
+  font-weight: bolder;
+  color: white;
 }
 .center > .bunner3 > div {
   position: absolute;
@@ -266,14 +275,23 @@ a {
   right: 0;
 }
 .center > .bunner4 {
-  background: url(../img/bunner4.png);
+  background: url(../img/bunner4.png) no-repeat 50% 50%;
+}
+.center > .bunner4 > p {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  font-size: 36px;
+  font-weight: bolder;
+  color: white;
 }
 .center > .bunner4 > div {
   position: absolute;
   top: 50%;
   left: 50%;
   display: table;
-  transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-45%);
   text-align: center;
 }
 .center > .bunner4 > div > a {
@@ -284,7 +302,7 @@ a {
   height: 500px;
 }
 .center > .bunner5 {
-  background: url(../img/bunner5.png);
+  background: url(../img/bunner5.png) no-repeat 50% 40%;
 }
 .center > .bunner5 > div {
   position: absolute;
@@ -345,10 +363,5 @@ a {
 .center > .jianlida > div:nth-child(2) > img {
   position: absolute;
   display: block;
-}
-@media screen and (max-width: 1230px) {
-  .center {
-    width: 100%;
-  }
 }
 /*# sourceMappingURL=index.css.map */
