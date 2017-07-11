@@ -82,7 +82,7 @@ a {
         position: relative;
         overflow: hidden;
         height: 600px;
-        background-size: 100% auto ;
+        background-size: auto 200% ;
         &>img {
             width: 100%;
             display: block;
@@ -92,7 +92,7 @@ a {
         background-attachment:fixed;
     }
     &>.bunner1 {
-        background: url(../img/bunner.png);
+        background: url(../img/bunner.png) no-repeat 50% 50%;
         &>div {
             height: 80%;
             width: 100%;
@@ -135,7 +135,7 @@ a {
                 &>p,
                 &>ul {
                     float: left;
-                    width: 51%;
+                    width: 57%;
                 }
                 &>p:nth-child(1) {
                     span {
@@ -169,7 +169,7 @@ a {
                         height: 50px;
                         line-height: 50px;
                         &>p {
-                            width: 35%;
+                            width: 30%;
                             display: inline-block;
                             font-weight: bolder;
                         }
@@ -186,7 +186,16 @@ a {
         }
     }
     &>.bunner3 {
-        background: url(../img/bunner3.png);
+        background: url(../img/bunner3.png)no-repeat 50% 50%;
+        &>p{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+            top:50px;
+            font-size: 36px;
+            font-weight: bolder;
+            color:white;
+        }
         &>div {
             position: absolute;
             left: 50%;
@@ -273,13 +282,22 @@ a {
         }
     }
     &>.bunner4 {
-        background: url(../img/bunner4.png);
+        background: url(../img/bunner4.png)no-repeat 50% 50%;
+        &>p{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+            top:10px;
+            font-size: 36px;
+            font-weight: bolder;
+            color:white;
+        }
         &>div{
             position: absolute;
             top:50%;
             left:50%;
             display: table;
-            transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-45%);
                     text-align: center;
             &>a{
                 float:left;
@@ -292,7 +310,7 @@ a {
         }
     }
     &>.bunner5 {
-        background: url(../img/bunner5.png);
+        background: url(../img/bunner5.png)no-repeat 50% 40%;
         &>div{
             position: absolute;
             top:50%;
@@ -353,10 +371,5 @@ a {
                 display: block;
             }
         }
-    }
-}
-@media screen and (max-width:1230px) {
-    .center {
-        width: 100%;
     }
 }
