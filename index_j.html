@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>简历</title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				overflow: hidden;
+				background: black;
+				text-align: center;
+			}
+			
+			.box {
+				height: 100%;
+				display: inline-block;
+				position: relative;
+			}
+			
+			.box>img {
+				height: 100%;
+			}
+			
+			.box>div {
+				height: 200px;
+				width: 200px;
+				position: absolute;
+				top: 0;
+				display: none;
+				box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.5);
+				cursor: crosshair;
+			}
+			
+			.fox {
+				position: absolute;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				-moz-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				-o-transform: translateY(-50%);
+				transform: translateY(-50%);
+				left: 110%;
+				height: 400px;
+				width: 400px;
+				overflow: hidden;
+				display: none;
+			}
+			
+			.fox>img {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<img src="img/jianli.png" />
+			<div></div>
+
+			<span class="fox">
+		<img src="img/jianli.png"/>
+	</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box = document.querySelector(".box")
+		var box_j = document.querySelector(".box>div")
+		var fox = document.querySelector(".fox")
+		var fox_j = document.querySelector(".fox>img")
+		box.onmouseover = function() {
+			box_j.style.display = "block"
+			fox.style.display = "block"
+		}
+		box.onmouseout = function() {
+			box_j.style.display = "none"
+			fox.style.display = "none"
+		}
+		box.onmousemove = function(ev) {
+			var lv = fox.offsetHeight / box_j.offsetHeight
+			fox_j.style.height = box.offsetHeight * lv+"px"
+			console.log(lv)
+			var ev = ev || event;
+			var X = ev.clientX;
+			var Y = ev.clientY;
+			var x = X - box.offsetLeft - box_j.offsetWidth / 2;
+			var y = Y - box.offsetTop - box_j.offsetHeight / 2;
+			x = x < 0 ? 0 : x;
+			y = y < 0 ? 0 : y;
+			if (x > box.offsetWidth - box_j.offsetWidth) {
+				x = box.offsetWidth - box_j.offsetWidth
+			}
+			if (y > box.offsetHeight - box_j.offsetHeight) {
+				y = box.offsetHeight - box_j.offsetHeight
+			}
+			box_j.style.left = x + "px";
+			box_j.style.top = y + "px"
+			fox_j.style.left = -x * lv + "px";
+			fox_j.style.top = -y * lv + "px"
+		}
+		box_j.onmousewheel = function(ev) {
+			var ev = ev || event
+			ev.preventDefault();
+			if (ev.wheelDelta > 0) {
+				box_j.style.width = box_j.offsetWidth + 10 + "px"
+				box_j.style.height = box_j.offsetHeight + 10 + "px"
+				if (box_j.offsetWidth > 450) {
+					box_j.style.width = "450px"
+				}
+				if (box_j.offsetHeight > 450) {
+					box_j.style.height = "450px"
+				}
+			} else {
+				box_j.style.width = box_j.offsetWidth - 10 + "px"
+				box_j.style.height = box_j.offsetHeight - 10 + "px"
+				if (box_j.offsetWidth < 100) {
+					box_j.style.width = "100px"
+				}
+				if (box_j.offsetHeight < 100) {
+					box_j.style.height = "100px"
+				}
+			}
+			box.onmousemove()
+		}
+	</script>
+
+</html>
